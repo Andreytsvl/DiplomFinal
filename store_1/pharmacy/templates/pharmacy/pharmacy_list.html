@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Список аптек</h1>
+<ul>
+    {% for pharmacy in pharmacies %}
+    <li>
+        <strong>№{{ pharmacy.number }}</strong>
+        <br>
+        Название: {{ pharmacy.name|default:"Не указано" }}
+        <br>
+        Адрес: {{ pharmacy.address }}
+        <br>
+        Телефон: {{ pharmacy.phone }}
+        <br>
+        Режим работы: {{ pharmacy.get_work_mode_display }}
+        <br>
+        Товароёмкость: {{ pharmacy.capacity }}
+        <br>
+        Сотрудники:
+        <ul>
+            {% for employee in pharmacy.employees.all %}
+            <li>{{ employee.username }}</li>
+            {% empty %}
+            <li>Нет сотрудников</li>
+            {% endfor %}
+        </ul>
+    </li>
+    <hr>
+    {% endfor %}
+</ul>
+{% endblock %}
