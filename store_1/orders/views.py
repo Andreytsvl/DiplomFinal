@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from basket_app.models import Basket
 from orders.forms import CreateOrderForm
 from orders.models import Order, OrderItem
+from pharmacy.models import Pharmacy
 
 @login_required
 def create_order(request):
@@ -65,10 +66,12 @@ def create_order(request):
         }
 
         form = CreateOrderForm(initial=initial)
+    pharmacies = Pharmacy.objects.all()
 
     context = {
         'title': 'Home - Оформление заказа',
         'form': form,
         'order': True,
+        'pharmacies': pharmacies,
     }
     return render(request, 'orders/create_order.html', context=context)

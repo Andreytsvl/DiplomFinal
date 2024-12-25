@@ -3,7 +3,7 @@
 {% load baskets_tags %}
 
 {% block content %}
-<div class=" bg-white p-5 mb-4 mx-2 rounded custom-shadow">
+<div class="bg-white p-5 mb-4 mx-2 rounded custom-shadow">
     <div class="container">
         <h3 class="text-center mb-4">Выбранные товары</h3>
         <div class="container" id="basket-items-container">
@@ -11,7 +11,7 @@
             {% user_baskets request as baskets %}
 
             {% include "basket_app/includes/included_basket.html" %}
-            <a class="button"  href="{% url 'orders:create_order' %}">
+            <a class="button" href="{% url 'orders:create_order' %}">
             <!-- Закончилась разметка корзины -->
         </div>
     </div>
@@ -94,6 +94,19 @@
                                 {% endif %}
                             </div>
                         </div>
+                        <!-- Добавляем поле для выбора аптеки -->
+                        <div class="col-md-12 mb-3">
+                            <label for="id_pharmacy" class="form-label">Выберите аптеку для самовывоза:</label>
+                            <select class="form-select" id="id_pharmacy" name="pharmacy">
+                                <option value="">-- Выберите аптеку --</option>
+                                {% for pharmacy in pharmacies %}
+                                    <option value="{{ pharmacy.id }}">{{ pharmacy.name }} - {{ pharmacy.address }}</option>
+                                {% endfor %}
+                            </select>
+                            {% if form.pharmacy.errors %}
+                                <div class="alert alert-danger alert-dismissible fade show">{{ form.pharmacy.errors }}</div>
+                            {% endif %}
+                        </div>
                     </div>
                     <button type="submit" class="btn btn-dark">Оформить заказ</button>
                 </form>
@@ -101,4 +114,4 @@
         </div>
     </div>
 </div>
-{% endblock  %}
+{% endblock %}

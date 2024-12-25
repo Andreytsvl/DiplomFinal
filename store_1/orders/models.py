@@ -1,6 +1,6 @@
 from django.db import models
 from products_app.models import Products
-
+from pharmacy.models import Pharmacy
 from users_app.models import User
 
 
@@ -23,6 +23,8 @@ class Order(models.Model):
     payment_on_get = models.BooleanField(default=False, verbose_name="Оплата при получении")
     is_paid = models.BooleanField(default=False, verbose_name="Оплачено")
     status = models.CharField(max_length=50, default='В обработке', verbose_name="Статус заказа")
+    pharmacy = models.ForeignKey(Pharmacy, on_delete=models.SET_NULL, null=True, blank=True,
+                                 verbose_name="Аптека для самовывоза")
 
     class Meta:
         db_table = "order"

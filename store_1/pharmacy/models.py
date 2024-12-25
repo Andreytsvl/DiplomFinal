@@ -35,6 +35,13 @@ class Pharmacy(models.Model):
         limit_choices_to={'is_staff': True},
         blank=True
     )
+    # Фотография фасада (новое поле)
+    facade_photo = models.ImageField(
+        upload_to='pharmacy_photos/',  # Папка для хранения фотографий
+        verbose_name="Фотография фасада",
+        blank=True,  # Поле может быть пустым
+        null=True   # Поле может быть NULL в базе данных
+    )
 
     def __str__(self):
         return f"Аптека №{self.number} ({self.address})"

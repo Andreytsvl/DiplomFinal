@@ -16,9 +16,10 @@ def about(request):
     pharmacies = Pharmacy.objects.all()
 
     context: dict = {
-        'title': 'О нас  (Это учебный сайт)',
+        'title': 'О нас',
         'content_page': 'Адрес. Телефон.(Это учебный сайт)',
-        'text': 'Наши преимущества',
+        'text1': 'Наши преимущества'   ,
+        'text2': 'Адрес. Телефон.(Это учебный сайт)',
         'pharmacies': pharmacies,  # Добавляем список аптек в контекст
     }
     return render(request, 'main_app/about.html', context)
