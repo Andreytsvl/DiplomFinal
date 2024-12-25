@@ -13,3 +13,24 @@ media/
 
 /.venv/
 /static/
+
+
+#
+#import os
+#import sys
+#from dotenv import load_dotenv
+#
+## Путь к проекту
+#project_folder = '/home/petrov85a/Recire'
+#if project_folder not in sys.path:
+#    sys.path.append(project_folder)
+#
+## Загрузка переменных окружения из .env (если используется)
+#load_dotenv(os.path.join(project_folder, '.env'))
+#
+## Указание настроек Django
+#os.environ['DJANGO_SETTINGS_MODULE'] = 'rec.settings'
+#
+## Импорт WSGI-приложения
+#from django.core.wsgi import get_wsgi_application
+#application = get_wsgi_application()
