@@ -2,7 +2,6 @@ from django.contrib import messages
 from django.db import transaction
 from django.forms import ValidationError
 from django.shortcuts import redirect, render
-
 from django.contrib.auth.decorators import login_required
 
 from basket_app.models import Basket
@@ -25,8 +24,7 @@ def create_order(request):
                         order = Order.objects.create(
                             user=user,
                             phone_number=form.cleaned_data['phone_number'],
-                            requires_delivery=form.cleaned_data['requires_delivery'],
-                            delivery_address=form.cleaned_data['delivery_address'],
+                            pharmacy=form.cleaned_data['pharmacy'],
                             payment_on_get=form.cleaned_data['payment_on_get'],
                         )
                         # Создать заказанные товары
@@ -37,8 +35,10 @@ def create_order(request):
                             quantity = basket_item.quantity
 
                             if product.quantity < quantity:
-                                raise ValidationError(f'Недостаточное количество товара {name} на складе\
-                                                         В наличии - {product.quantity}')
+                                raise ValidationError(
+                                    f'Недостаточное количество товара {name} на складе. '
+                                    f'В наличии - {product.quantity}'
+                                )
 
                             OrderItem.objects.create(
                                 order=order,
@@ -56,18 +56,16 @@ def create_order(request):
                         messages.success(request, 'Заказ оформлен!')
                         return redirect('user:profile')
             except ValidationError as e:
-                messages.success(request, str(e))
+                messages.error(request, str(e))
                 return redirect('basket:order')
     else:
         initial = {
-            'first_name': request.user.first_name,
-            'last_name': request.user.last_name,
             'phone_number': request.user.phone_number,
         }
 
         form = CreateOrderForm(initial=initial)
-    pharmacies = Pharmacy.objects.all()
 
+    pharmacies = Pharmacy.objects.all()
     context = {
         'title': 'Home - Оформление заказа',
         'form': form,

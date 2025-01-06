@@ -28,10 +28,12 @@ urlpatterns = [
     path('basket/', include('basket_app.urls', namespace='basket')),
     path('orders/', include('orders.urls', namespace='orders')),
     path('pharmacy/', include('pharmacy.urls', namespace='pharmacy')),
-    path("__debug__/", include("debug_toolbar.urls")), #DEBUG режим
+    #path("__debug__/", include("debug_toolbar.urls")), #DEBUG режим
     #static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 ]
 
 if settings.DEBUG:
-
+    urlpatterns += [
+        path("__debug__/", include("debug_toolbar.urls")),
+    ]
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
