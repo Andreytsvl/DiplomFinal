@@ -1,4 +1,5 @@
 {% load static %}
+{% load cache %}
 {% load product_tags %}
 {% load baskets_tags %}
 
@@ -103,10 +104,12 @@
                             height="16">
                     </button>
                     <ul class="dropdown-menu bg-dark" data-bs-theme="dark">
+                        {% cache 100 catalog_categories %}
                         {% tag_categories as categories %}
                         {% for category in categories %}
                             <li><a class="dropdown-item text-white" href="{% url 'catalog:index' category.id %}">{{ category.name }}</a></li>
                         {% endfor %}
+                        {% endcache %}
                     </ul>
                 </div>
 <!--                 Значок корзины, вызывает модальное окно-->
@@ -169,6 +172,7 @@
         </div>
     </section>
     {% block footer %}
+
     {% endblock footer %}
 
     <script src="{% static 'deps/js/bootstrap/bootstrap.bundle.min.js' %}"></script>

@@ -5,8 +5,8 @@ cache/
 
 #ide stuff
 .vscode
-.idea
-
+.idea/
+/logs/
 #django stuff
 db.sqlite3
 media/
