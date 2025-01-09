@@ -2,7 +2,7 @@ import os
 import logging
 from git import Repo
 from datetime import datetime
-import atexit
+#import atexit
 from logging.handlers import RotatingFileHandler
 
 
@@ -21,7 +21,7 @@ logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
     #filename=os.path.join(log_dir, 'git_auto_commit.log'),  # Логи будут сохраняться в этот файл
-    #filemode='a',  # Режим добавления (append)
+    #filemode='a',  # Режим добавления (append) Если есть хендлер, эти строки не нужны.
     handlers=[handler],
 )
 
@@ -71,6 +71,6 @@ def git_auto_commit():
 #atexit.register(git_auto_commit)
 
 if __name__ == "__main__":
-    #pass
+    pass
     git_auto_commit()
-    # Запуск от команды python git_auto_commit.py
+    #Запуск от команды python git_auto_commit.py
