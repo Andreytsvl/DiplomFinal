@@ -7,7 +7,7 @@ import atexit
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
-    filename='git_auto_commit.logs',  # Логи будут сохраняться в этот файл
+    filename='git_auto_commit.log',  # Логи будут сохраняться в этот файл
     filemode='a',  # Режим добавления (append)
 )
 

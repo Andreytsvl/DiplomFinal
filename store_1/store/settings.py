@@ -174,26 +174,26 @@ LOGIN_URL = '/user/login/' #работа декоратора логин_рек�
 # CRON_CLASSES = [
 #     "main_app.cron.ClearCacheCronJob",
 # ]
-
-import os
-
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'file': {
-            'level': 'INFO',  # Уровень логирования (INFO, DEBUG, ERROR и т.д.)
-            'class': 'logging.FileHandler',
-            'filename': os.path.join(os.path.dirname(os.path.abspath(__file__)), 'logs', 'django.logs'),  # Путь к файлу логов
-            'maxBytes': 1024 * 1024 * 5,  # 5 МБ
-            'backupCount': 5,  # Хранить 5 файлов логов
-        },
-    },
-    'loggers': {
-        '': {  # Корневой логгер
-            'handlers': ['file'],
-            'level': 'INFO',
-            'propagate': True,
-        },
-    },
-}
+#
+# import os
+#
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'handlers': {
+#         'file': {
+#             'level': 'INFO',  # Уровень логирования (INFO, DEBUG, ERROR и т.д.)
+#             'class': 'logging.FileHandler',
+#             'filename': os.path.join(os.path.dirname(os.path.abspath(__file__)), 'logs', 'django.logs'),  # Путь к файлу логов
+#             'maxBytes': 1024 * 1024 * 5,  # 5 МБ
+#             'backupCount': 5,  # Хранить 5 файлов логов
+#         },
+#     },
+#     'loggers': {
+#         '': {  # Корневой логгер
+#             'handlers': ['file'],
+#             'level': 'INFO',
+#             'propagate': True,
+#         },
+#     },
+# }
