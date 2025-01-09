@@ -3,11 +3,15 @@ import logging
 from git import Repo
 from datetime import datetime
 import atexit
+
+# Создаём папку logs, если её нет
+log_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'logs')
+os.makedirs(log_dir, exist_ok=True)
 # Настройка логирования
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
-    filename='git_auto_commit.log',  # Логи будут сохраняться в этот файл
+    filename=os.path.join(log_dir, 'git_auto_commit.log'),  # Логи будут сохраняться в этот файл
     filemode='a',  # Режим добавления (append)
 )
 
@@ -51,7 +55,9 @@ def git_auto_commit():
         # Логируем ошибку
         logger.error(f"Ошибка: {e}", exc_info=True)
 
-atexit.register(git_auto_commit)
+#atexit.register(git_auto_commit)
 
 if __name__ == "__main__":
+    #pass
     git_auto_commit()
+    # Запуск от команды python git_auto_commit.py
