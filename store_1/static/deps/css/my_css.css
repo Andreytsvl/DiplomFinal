@@ -12,10 +12,14 @@ body {
   content: none;
 }
 
-@media:(max-width:800px){
-  .dropdown{
-   grid-template-columns
- }
+@media (max-width: 768px) {
+    .dropdown.mb-2 {
+        margin-bottom: 0.5rem !important;
+    }
+
+    #modalButton {
+        margin-top: 0.5rem;
+    }
 }
 
 .custom-shadow {

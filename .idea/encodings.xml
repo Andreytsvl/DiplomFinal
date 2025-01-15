@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/store_1/cache/9d7b63c1d4a860bbe087650a5dcc56c2.djcache" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/store_1/orders/templates/orders/payment_process.html" charset="UTF-8" />
     <file url="PROJECT" charset="windows-1251" />
   </component>
 </project>

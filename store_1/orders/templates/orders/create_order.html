@@ -83,10 +83,42 @@
                             {% endif %}
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-dark">Оформить заказ</button>
+                    <button type="submit" class="btn btn-dark" id="create-order-button">Оформить заказ</button>
                 </form>
+                <!-- Контейнер для кнопки оплаты -->
+                <div id="pay-button-container" style="display: none;">
+                    <a href="{% url 'orders:payment_process' %}" class="btn btn-success mt-3">Перейти к оплате</a>
+                </div>
             </div>
         </div>
     </div>
 </div>
-{% endblock %}
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const paymentCard = document.getElementById('id_payment_on_get_0'); // Радиокнопка "Оплата картой"
+    const paymentOnGet = document.getElementById('id_payment_on_get_1'); // Радиокнопка "Оплата при получении"
+    const payButtonContainer = document.getElementById('pay-button-container'); // Контейнер для кнопки оплаты
+    const createOrderButton = document.getElementById('create-order-button'); // Кнопка "Оформить заказ"
+
+    // Функция для управления видимостью кнопок
+    function toggleButtons() {
+        if (paymentCard.checked) {
+            payButtonContainer.style.display = 'block'; // Показываем кнопку "Перейти к оплате"
+            createOrderButton.style.display = 'none'; // Скрываем кнопку "Оформить заказ"
+        } else {
+            payButtonContainer.style.display = 'none'; // Скрываем кнопку "Перейти к оплате"
+            createOrderButton.style.display = 'block'; // Показываем кнопку "Оформить заказ"
+        }
+    }
+
+    // Назначаем обработчики событий на радиокнопки
+    paymentCard.addEventListener('change', toggleButtons);
+    paymentOnGet.addEventListener('change', toggleButtons);
+
+    // Инициализация при загрузке страницы
+    toggleButtons();
+});
+</script>
+
+{% endblock %}url

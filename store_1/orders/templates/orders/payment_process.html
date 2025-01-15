@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <h2 class="text-center mb-4">Оплата заказа</h2>
+    <div class="card">
+        <div class="card-body">
+            <form id="payment-form" method="post" action="{% url 'orders:create_order' %}">
+                {% csrf_token %}
+                <!-- Поле для номера карты -->
+                <div class="mb-3">
+                    <label for="card-number" class="form-label">Номер карты</label>
+                    <input type="text" class="form-control" id="card-number" name="card-number"
+                           placeholder="4242 4242 4242 4242" maxlength="19" required>
+                </div>
+
+                <!-- Поле для срока действия -->
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="card-expiry" class="form-label">Срок действия</label>
+                        <input type="text" class="form-control" id="card-expiry" name="card-expiry" placeholder="MM/YY"
+                               required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="card-cvc" class="form-label">CVC</label>
+                        <input type="text" class="form-control" id="card-cvc" name="card-cvc" placeholder="123"
+                               required>
+                    </div>
+                </div>
+
+                <!-- Поле для суммы -->
+                <div class="mb-3">
+                    <label for="amount" class="form-label">Сумма к оплате</label>
+                    <input type="text" class="form-control" id="amount" name="amount" value="{{ baskets.total_price }}"
+                           readonly>
+                </div>
+
+                <!-- Кнопка оплаты -->
+                <button type="submit" class="btn btn-success w-100">Оплатить</button>
+            </form>
+
+            <!-- Сообщение об успешной оплате -->
+            <div id="payment-success" class="alert alert-success mt-3" style="display: none;">
+                Оплата прошла успешно! Спасибо за покупку.
+            </div>
+
+            <!-- Сообщение об ошибке -->
+            <div id="payment-error" class="alert alert-danger mt-3" style="display: none;">
+                Ошибка оплаты. Проверьте данные карты.
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Скрипт для форматирования номера карты -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const cardNumberInput = document.getElementById('card-number');
+
+        cardNumberInput.addEventListener('input', function(event) {
+            // Убираем все пробелы и нечисловые символы
+            let value = event.target.value.replace(/\D/g, '');
+
+            // Добавляем пробелы после каждых 4 цифр
+            value = value.replace(/(\d{4})(?=\d)/g, '$1 ');
+
+            // Обновляем значение поля
+            event.target.value = value.trim();
+        });
+    });
+</script>
+
+<!-- Скрипт для обработки формы -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const paymentForm = document.getElementById('payment-form');
+        const paymentSuccess = document.getElementById('payment-success');
+        const paymentError = document.getElementById('payment-error');
+
+        paymentForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // Отменяем стандартное поведение формы
+
+            // Имитация успешной оплаты
+            const cardNumber = document.getElementById('card-number').value.replace(/\s/g, ''); // Убираем пробелы
+            if (cardNumber === '4242424242424242') {
+                // Если оплата успешна, отправляем форму на сервер
+                paymentForm.submit(); // Отправляем форму
+            } else {
+                paymentError.style.display = 'block';
+                paymentSuccess.style.display = 'none';
+            }
+        });
+    });
+</script>
+{% endblock %}
