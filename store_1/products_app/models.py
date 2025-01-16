@@ -74,6 +74,9 @@ class Products(models.Model):
     def display_id(self):
         return f"{self.id:06}"
 
+    # def get_absolute_url(self): не работает
+    #     return reverse('products', kwargs={'product_id': self.pk})
+
     def retail_price(self):
         if self.discount:
             return round(self.price - self.price * self.discount / 100, 2)

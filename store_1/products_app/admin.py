@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.utils.html import format_html
 from products_app.models import Categories, Recipe_status, Storage_conditions, Price_category, Products
 
 #admin.site.register(Categories)
@@ -26,6 +27,14 @@ class ProductsAdmin(admin.ModelAdmin):
         "storage_conditions",
         "recipe_status"
   ] # порядок размещения полей внутри
+
+    # def view_on_site_link(self, obj):  не работает
+    #     if obj.pk:
+    #         url = obj.get_absolute_url()
+    #         return format_html('<a href="{}" target="_blank">Смотреть на сайте</a>', url)
+    #     return "—"
+    #
+    # view_on_site_link.short_description = 'Ссылка на сайте'
 
 @admin.register(Categories)
 class CategoriesAdmin(admin.ModelAdmin):

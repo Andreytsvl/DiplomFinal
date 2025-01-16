@@ -33,6 +33,7 @@ class OrderTabulareAdmin(admin.TabularInline):
         "payment_on_get",
         "is_paid",
         "created_timestamp",
+        "pharmacy"
     )
 
     search_fields = (
@@ -50,7 +51,7 @@ class OrderAdmin(admin.ModelAdmin):
     list_display = (
         "id",
         "user",
-
+        "pharmacy",
         "status",
         "payment_on_get",
         "is_paid",

@@ -5,8 +5,10 @@ cache/
 
 #ide stuff
 .vscode
+.idea
 .idea/
 /idea/
+/.idea/
 /logs/
 #django stuff
 db.sqlite3

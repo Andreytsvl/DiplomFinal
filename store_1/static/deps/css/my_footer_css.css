@@ -5,3 +5,19 @@ footer {
     background-color: #277a38;
     padding: 10px 0;
   }
+
+  /* Пример CSS для прижатия футера к низу */
+html, body {
+    height: 100%;
+}
+#wrapper {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+#content {
+    flex: 1;
+}
+footer {
+    flex-shrink: 0;
+}
